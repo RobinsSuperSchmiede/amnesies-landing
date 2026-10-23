@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react"
-import { ArrowRight, Image } from "lucide-react"
+import { ArrowRight, Contrast, Image } from "lucide-react"
 import { Backdrop } from "@/components/backdrop"
 import { GithubIcon, XIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
@@ -28,7 +28,7 @@ function WithTooltip({ label, children }: { label: string; children: ReactNode }
 
 function Logo() {
   return (
-    <a href="/" className="text-base font-semibold tracking-tight">
+    <a href="/" className="text-xl font-semibold tracking-tight md:text-2xl">
       Amnesies
     </a>
   )
@@ -40,6 +40,14 @@ export function Landing() {
   const t = TEXT[lang]
   const bg = BACKGROUNDS[bgIndex]
   const layout = HERO_VARIANTS[variant]
+  const neutral = layout.surface === "neutral"
+  const surface = neutral ? (prefs.neutral === "black" ? "#000000" : "#ffffff") : bg.surface
+  // Akzent wäre auf gleichfarbiger Fläche unsichtbar: dann Button weiß mit Akzentschrift
+  const clash = !neutral && bg.accentIsSurface
+  const brand = {
+    "--brand": clash ? "#ffffff" : bg.accent,
+    "--brand-fg": clash ? bg.accent : "#ffffff",
+  } as CSSProperties
 
   const toolbar = (
     <div className="flex items-center gap-1">
@@ -64,6 +72,13 @@ export function Landing() {
           {lang.toUpperCase()}
         </Button>
       </WithTooltip>
+      {neutral && (
+        <WithTooltip label={t.switchSurface}>
+          <Button variant="ghost" size="icon-sm" onClick={prefs.toggleNeutral} aria-label={t.switchSurface}>
+            <Contrast />
+          </Button>
+        </WithTooltip>
+      )}
       <WithTooltip label={`${t.switchBg} (${bgIndex + 1}/${BACKGROUNDS.length})`}>
         <Button variant="ghost" size="icon-sm" onClick={prefs.nextBg} aria-label={t.switchBg}>
           <Image />
@@ -76,7 +91,7 @@ export function Landing() {
     <TooltipProvider>
       <div
         className={cn("relative flex h-dvh flex-col overflow-hidden transition-colors duration-700", layout.className.root)}
-        style={{ backgroundColor: layout.surface === "white" ? "#ffffff" : bg.surface }}
+        style={{ backgroundColor: surface, ...brand }}
       >
         {/* key: Einblend-Animation läuft beim Variantenwechsel erneut */}
         <section key={variant} className={cn("flex flex-col px-6 pt-4", layout.className.content)}>
@@ -98,11 +113,19 @@ export function Landing() {
 
           <div className={cn("flex flex-col items-center gap-5 py-8 text-center", layout.className.body)}>
             <h1
-              className={cn("text-3xl leading-[1.05] font-bold tracking-tight text-balance", layout.className.headline, reveal)}
+              className={cn("text-3xl leading-[1.05] font-semibold tracking-tight", layout.className.headline, reveal)}
               style={delay(100)}
             >
-              <span key={lang} className={swap}>
+              <span key={lang} className={cn("block", swap)}>
                 {t.headline}
+              </span>
+              {/* zweite Zeile: Serifenschrift in der Akzentfarbe */}
+              <span
+                key={`${lang}-accent`}
+                className={cn("block font-serif text-[1.15em] leading-none font-normal tracking-normal italic transition-colors duration-700", swap)}
+                style={{ color: clash ? undefined : bg.accent }}
+              >
+                {t.headlineAccent}
               </span>
             </h1>
             <p className={cn("max-w-xl text-sm leading-relaxed text-foreground/75 md:text-base", reveal)} style={delay(250)}>
@@ -111,7 +134,7 @@ export function Landing() {
               </span>
             </p>
             <div className={cn("mt-2 flex flex-wrap gap-3", reveal)} style={delay(400)}>
-              <Button asChild variant="outline" size="lg">
+              <Button asChild variant="outline" size="lg" className="cta-ghost">
                 <a href={LINKS.github} target="_blank" rel="noopener">
                   <GithubIcon />
                   <span key={lang} className={swap}>
@@ -119,12 +142,12 @@ export function Landing() {
                   </span>
                 </a>
               </Button>
-              <Button asChild size="lg" className="group">
+              <Button asChild size="lg" className="cta group relative overflow-hidden">
                 <a href={LINKS.app}>
                   <span key={lang} className={swap}>
                     {t.signIn}
                   </span>
-                  <ArrowRight className="transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
               </Button>
             </div>

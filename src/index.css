@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+/* Schriften lokal gebündelt, keine Anfragen an Google */
+@import "@fontsource-variable/geist";
+@import "@fontsource/instrument-serif/400-italic.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -47,6 +50,8 @@
 }
 
 @theme inline {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -83,6 +88,71 @@
   }
   body {
     @apply bg-background text-foreground antialiased transition-colors duration-500;
+  }
+}
+
+/* Call-to-Action-Buttons. Bewusst ohne @layer, damit sie die shadcn-Varianten überschreiben.
+   --brand / --brand-fg setzt die Komponente aus der Akzentfarbe des Bildes. */
+.cta {
+  background: var(--brand);
+  color: var(--brand-fg);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), inset 0 1px 0 rgb(255 255 255 / 0.22);
+  transition: translate 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease, background-color 0.6s ease, color 0.6s ease;
+}
+.cta:hover {
+  background: var(--brand);
+  translate: 0 -2px;
+  box-shadow:
+    0 14px 34px -10px var(--brand),
+    0 0 0 4px color-mix(in oklch, var(--brand) 22%, transparent),
+    inset 0 1px 0 rgb(255 255 255 / 0.22);
+}
+/* Lichtstreifen, der beim Hover über den Button wischt */
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.4) 50%, transparent 70%);
+  translate: -120% 0;
+  transition: translate 0.8s ease;
+  pointer-events: none;
+}
+.cta:hover::after {
+  translate: 120% 0;
+}
+
+.cta-ghost {
+  background: color-mix(in oklch, var(--foreground) 4%, transparent);
+  border-color: color-mix(in oklch, var(--foreground) 22%, transparent);
+  transition: translate 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.cta-ghost:hover {
+  translate: 0 -2px;
+  color: var(--foreground);
+  background: color-mix(in oklch, var(--foreground) 9%, transparent);
+  border-color: color-mix(in oklch, var(--foreground) 55%, transparent);
+  box-shadow: 0 12px 30px -14px rgb(0 0 0 / 0.45);
+}
+.cta-ghost svg {
+  transition: rotate 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.cta-ghost:hover svg {
+  rotate: -14deg;
+}
+
+.cta:active,
+.cta-ghost:active {
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .cta-ghost,
+  .cta-ghost svg {
+    transition: none;
+  }
+  .cta::after {
+    display: none;
   }
 }
 

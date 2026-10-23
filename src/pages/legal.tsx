@@ -34,9 +34,10 @@ const DATENSCHUTZ: Record<Lang, Doc> = {
     sections: [
       { heading: "1. Verantwortlicher", body: "[Vorname Nachname], [Anschrift], [E-Mail]" },
       { heading: "2. Hosting", body: "Diese Website wird bei [Hosting-Anbieter] gehostet. Beim Aufruf werden technisch notwendige Daten (z. B. IP-Adresse, Zeitpunkt, Browser) in Server-Logfiles verarbeitet (Art. 6 Abs. 1 lit. f DSGVO)." },
-      { heading: "3. Cookies und Tracking", body: "Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Dienste. Wenn Sie Sprache oder Hintergrund wechseln, wird diese Auswahl nur lokal in Ihrem Browser (localStorage) gespeichert und nicht übertragen." },
-      { heading: "4. Externe Links", body: "Die Website verlinkt auf GitHub, X und die Amnesies-Anwendung. Erst beim Anklicken werden Daten an diese Anbieter übertragen; es gelten deren Datenschutzbestimmungen." },
-      { heading: "5. Ihre Rechte", body: "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruch sowie Beschwerde bei einer Aufsichtsbehörde." },
+      { heading: "3. Cookies und Tracking", body: "Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Dienste. Wenn Sie Darstellungseinstellungen ändern (Sprache, Layout, Hintergrund), wird diese Auswahl nur lokal in Ihrem Browser (localStorage) gespeichert und nicht übertragen." },
+      { heading: "4. Schriftarten", body: "Die verwendeten Schriftarten sind auf dieser Website selbst gespeichert; es werden keine Daten an Dritte (z. B. Google) übertragen." },
+      { heading: "5. Externe Links", body: "Die Website verlinkt auf GitHub, X und die Amnesies-Anwendung. Erst beim Anklicken werden Daten an diese Anbieter übertragen; es gelten deren Datenschutzbestimmungen." },
+      { heading: "6. Ihre Rechte", body: "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruch sowie Beschwerde bei einer Aufsichtsbehörde." },
     ],
   },
   en: {
@@ -44,9 +45,10 @@ const DATENSCHUTZ: Record<Lang, Doc> = {
     sections: [
       { heading: "1. Controller", body: "[First name Last name], [Address], [Email]" },
       { heading: "2. Hosting", body: "This website is hosted by [hosting provider]. When you visit, technically necessary data (e.g. IP address, time, browser) is processed in server log files (Art. 6(1)(f) GDPR)." },
-      { heading: "3. Cookies and tracking", body: "This website sets no cookies and uses no analytics or tracking services. If you change the language or background, that choice is stored only locally in your browser (localStorage) and is never transmitted." },
-      { heading: "4. External links", body: "This website links to GitHub, X and the Amnesies application. Data is only transferred to these providers when you click a link; their privacy policies apply." },
-      { heading: "5. Your rights", body: "You have the right to access, rectification, erasure, restriction of processing, data portability, objection, and to lodge a complaint with a supervisory authority." },
+      { heading: "3. Cookies and tracking", body: "This website sets no cookies and uses no analytics or tracking services. If you change display settings (language, layout, background), that choice is stored only locally in your browser (localStorage) and is never transmitted." },
+      { heading: "4. Fonts", body: "All fonts are hosted on this website itself; no data is transferred to third parties (e.g. Google)." },
+      { heading: "5. External links", body: "This website links to GitHub, X and the Amnesies application. Data is only transferred to these providers when you click a link; their privacy policies apply." },
+      { heading: "6. Your rights", body: "You have the right to access, rectification, erasure, restriction of processing, data portability, objection, and to lodge a complaint with a supervisory authority." },
     ],
   },
 }

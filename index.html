@@ -7,7 +7,7 @@
   <title>Amnesies</title>
   <meta name="description" content="Amnesies">
   <!-- Theme vor dem ersten Rendern setzen; dunkle Hintergründe wie in src/config.ts, weiße Varianten wie in src/hero-variants.ts -->
-  <script>try{var b=localStorage.getItem("bg"),d=localStorage.getItem("variant")==="rotated"?false:b===null?matchMedia("(prefers-color-scheme: dark)").matches:[0,1,2,4].indexOf(+b)>-1;d&&document.documentElement.classList.add("dark")}catch(e){}</script>
+  <script>try{var b=localStorage.getItem("bg"),d=localStorage.getItem("variant")==="rotated"?localStorage.getItem("surface")==="black":b===null?matchMedia("(prefers-color-scheme: dark)").matches:[0,1,2,4].indexOf(+b)>-1;d&&document.documentElement.classList.add("dark")}catch(e){}</script>
 </head>
 <body>
   <div id="root"></div>

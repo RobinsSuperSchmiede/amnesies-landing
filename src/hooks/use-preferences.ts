@@ -43,6 +43,12 @@ function initialVariant(): HeroVariant {
   return Object.values(HeroVariant).find((v) => v === stored) ?? DEFAULT_VARIANT
 }
 
+export type NeutralSurface = "white" | "black"
+
+function initialNeutral(): NeutralSurface {
+  return store.get("surface") === "black" ? "black" : "white"
+}
+
 function initialBg(): number | null {
   const stored = store.get("bg")
   return stored !== null && BACKGROUNDS[+stored] ? +stored : null
@@ -54,10 +60,14 @@ export function usePreferences() {
   const [lang, setLang] = useState(initialLang)
   const [chosenBg, setChosenBg] = useState(initialBg)
   const [variant, setVariant] = useState(initialVariant)
+  const [neutral, setNeutral] = useState(initialNeutral)
 
   const bgIndex = chosenBg ?? DEFAULT_BG[systemDark ? "dark" : "light"]
-  // Varianten mit weißer Fläche brauchen immer dunklen Text
-  const tone = HERO_VARIANTS[variant].surface === "white" ? "light" : BACKGROUNDS[bgIndex].tone
+  // Varianten mit neutraler Fläche richten die Textfarbe nach Schwarz/Weiß, sonst nach dem Bild
+  const tone =
+    HERO_VARIANTS[variant].surface === "neutral"
+      ? neutral === "black" ? "dark" : "light"
+      : BACKGROUNDS[bgIndex].tone
 
   useEffect(() => {
     document.documentElement.lang = lang
@@ -71,6 +81,12 @@ export function usePreferences() {
     lang,
     bgIndex,
     variant,
+    neutral,
+    toggleNeutral() {
+      const next = neutral === "white" ? "black" : "white"
+      store.set("surface", next)
+      setNeutral(next)
+    },
     selectVariant(next: HeroVariant) {
       store.set("variant", next)
       setVariant(next)

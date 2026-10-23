@@ -16,8 +16,8 @@ export type HeroLayout = {
   imageFit: "cover" | "contain"
   // Bild um 90° gedreht (Hochformat)
   imageRotated?: boolean
-  // image: Fläche in Randfarbe des Bildes, white: immer weiß (dann immer helles Theme)
-  surface: "image" | "white"
+  // image: Fläche in Randfarbe des Bildes, neutral: schwarz oder weiß (umschaltbar)
+  surface: "image" | "neutral"
   className: {
     root: string // Gesamtlayout
     content: string // Bereich mit Logo, Headline, Text, Buttons
@@ -77,7 +77,7 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
     logo: "corner",
     imageFit: "cover",
     imageRotated: true,
-    surface: "white",
+    surface: "neutral",
     className: {
       // Außenabstand rundum, seitlich größer, damit Content und Bild mittig sitzen
       root: "md:grid md:grid-cols-[minmax(0,1fr)_auto] md:grid-rows-[minmax(0,1fr)] md:gap-[6vw] md:px-[max(4rem,calc((100vw-72rem)/2))] md:py-[6vh]",
