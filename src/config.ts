@@ -6,14 +6,15 @@ export const LINKS = {
 }
 
 // tone = Helligkeit des Bildes, bestimmt die Textfarbe.
+// surface = Randfarbe des Bildes, damit Fläche und Bild nahtlos ineinander übergehen.
 // Reihenfolge und Töne auch im Inline-Skript der HTML-Dateien anpassen.
 export const BACKGROUNDS = [
-  { src: "/bg/1.png", tone: "dark" },
-  { src: "/bg/2.png", tone: "dark" },
-  { src: "/bg/3.png", tone: "dark" },
-  { src: "/bg/4.png", tone: "light" },
-  { src: "/bg/5.png", tone: "dark" },
-  { src: "/bg/6.png", tone: "light" },
+  { src: "/bg/1.png", tone: "dark", surface: "#006cfc" },
+  { src: "/bg/2.png", tone: "dark", surface: "#006cfd" },
+  { src: "/bg/3.png", tone: "dark", surface: "#006cfd" },
+  { src: "/bg/4.png", tone: "light", surface: "#fefefe" },
+  { src: "/bg/5.png", tone: "dark", surface: "#000000" },
+  { src: "/bg/6.png", tone: "light", surface: "#fefefe" },
 ] as const
 
 export const DEFAULT_BG = { light: 5, dark: 4 }

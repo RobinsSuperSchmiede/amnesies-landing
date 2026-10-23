@@ -23,8 +23,6 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
-  /* Farbe des Schleiers über dem Hintergrundbild (RGB) */
-  --scrim: 255 255 255;
 }
 
 .dark {
@@ -46,7 +44,6 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --scrim: 0 0 0;
 }
 
 @theme inline {
@@ -89,13 +86,7 @@
   }
 }
 
-/* Hintergrund: Bild gedämpft, Schleier zur Mitte hin stärker */
+/* Hintergrundbild: weiches Überblenden beim Wechsel, sonst unverändert */
 .backdrop-layer {
-  filter: saturate(0.75) blur(1.5px);
   transition: opacity 1.2s ease, transform 8s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.backdrop-scrim {
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgb(var(--scrim) / 0.7), rgb(var(--scrim) / 0.25) 75%),
-    linear-gradient(rgb(var(--scrim) / 0.15), rgb(var(--scrim) / 0.15));
 }

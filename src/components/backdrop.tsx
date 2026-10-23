@@ -3,8 +3,9 @@ import { cn } from "@/lib/utils"
 
 type Layer = { id: number; src: string }
 
-// Zwei Ebenen: neues Bild wird erst geladen, dann über das alte geblendet
-export function Backdrop({ src }: { src: string }) {
+// Zwei Ebenen: neues Bild wird erst geladen, dann über das alte geblendet.
+// Das Bild wird unverändert gezeigt (keine Filter); Position und Größe kommen über className.
+export function Backdrop({ src, fit = "cover", className }: { src: string; fit?: "cover" | "contain"; className?: string }) {
   const [layers, setLayers] = useState<Layer[]>([])
   const [activeId, setActiveId] = useState<number | null>(null)
   const nextId = useRef(0)
@@ -26,18 +27,20 @@ export function Backdrop({ src }: { src: string }) {
   }, [src])
 
   return (
-    <div aria-hidden="true" className="fixed inset-0 -z-10 overflow-hidden">
+    <div aria-hidden="true" className={cn("relative overflow-hidden", className)}>
       {layers.map((layer) => (
-        <div
+        <img
           key={layer.id}
+          src={layer.src}
+          alt=""
+          decoding="async"
           className={cn(
-            "backdrop-layer absolute -inset-[2%] bg-cover bg-center bg-no-repeat",
-            layer.id === activeId ? "scale-100 opacity-55" : "scale-[1.06] opacity-0",
+            "backdrop-layer absolute inset-0 size-full motion-reduce:transition-none",
+            fit === "contain" ? "object-contain" : "object-cover",
+            layer.id === activeId ? "scale-100 opacity-100" : "scale-[1.04] opacity-0",
           )}
-          style={{ backgroundImage: `url("${layer.src}")` }}
         />
       ))}
-      <div className="backdrop-scrim absolute inset-0 transition-colors duration-500" />
     </div>
   )
 }

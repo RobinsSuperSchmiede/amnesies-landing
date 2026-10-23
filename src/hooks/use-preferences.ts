@@ -1,5 +1,6 @@
 import { useEffect, useState, useSyncExternalStore } from "react"
 import { BACKGROUNDS, DEFAULT_BG } from "@/config"
+import { DEFAULT_VARIANT, HeroVariant } from "@/hero-variants"
 import type { Lang } from "@/i18n"
 
 const store = {
@@ -37,6 +38,11 @@ function initialLang(): Lang {
   return navigator.language.toLowerCase().startsWith("de") ? "de" : "en"
 }
 
+function initialVariant(): HeroVariant {
+  const stored = store.get("variant")
+  return Object.values(HeroVariant).find((v) => v === stored) ?? DEFAULT_VARIANT
+}
+
 function initialBg(): number | null {
   const stored = store.get("bg")
   return stored !== null && BACKGROUNDS[+stored] ? +stored : null
@@ -47,6 +53,7 @@ export function usePreferences() {
   const systemDark = useSystemDark()
   const [lang, setLang] = useState(initialLang)
   const [chosenBg, setChosenBg] = useState(initialBg)
+  const [variant, setVariant] = useState(initialVariant)
 
   const bgIndex = chosenBg ?? DEFAULT_BG[systemDark ? "dark" : "light"]
   const tone = BACKGROUNDS[bgIndex].tone
@@ -62,6 +69,11 @@ export function usePreferences() {
   return {
     lang,
     bgIndex,
+    variant,
+    selectVariant(next: HeroVariant) {
+      store.set("variant", next)
+      setVariant(next)
+    },
     toggleLang() {
       const next = lang === "de" ? "en" : "de"
       store.set("lang", next)
