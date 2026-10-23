@@ -213,23 +213,6 @@
   }
 }
 
-/* Wechselndes Wort rollt von unten herein */
-.ticker-in {
-  animation: ticker-in 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-@keyframes ticker-in {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
-}
-
 /* Bild atmet langsam */
 .breathe {
   animation: breathe 16s ease-in-out infinite alternate;
@@ -244,7 +227,6 @@
   .word-in,
   .amnesia,
   .bang,
-  .ticker-in,
   .breathe {
     animation: none;
   }

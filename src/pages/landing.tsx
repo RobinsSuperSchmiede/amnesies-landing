@@ -1,11 +1,11 @@
 import type { CSSProperties, ReactNode } from "react"
 import { ArrowRight, Contrast, Image } from "lucide-react"
 import { Backdrop } from "@/components/backdrop"
-import { BangLine, Emphasis, ForgettingLine, Ticker } from "@/components/hero-text"
+import { BangLine, Emphasis, ForgettingLine } from "@/components/hero-text"
 import { GithubIcon, XIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { BACKGROUNDS, LINKS, MCP_CLIENTS } from "@/config"
+import { BACKGROUNDS, LINKS } from "@/config"
 import { HERO_VARIANTS, HeroVariant } from "@/hero-variants"
 import { usePreferences } from "@/hooks/use-preferences"
 import { TEXT } from "@/i18n"
@@ -95,7 +95,7 @@ export function Landing() {
         style={{ backgroundColor: surface, ...brand }}
       >
         {/* key: Einblend-Animation läuft beim Variantenwechsel erneut */}
-        <section key={variant} className={cn("flex flex-col px-6 pt-4", layout.className.content)}>
+        <section key={variant} className={cn("relative z-10 flex flex-col px-6 pt-4", layout.className.content)}>
           <header className={cn("relative flex items-center", reveal)}>
             {layout.logo === "corner" ? (
               <>
@@ -113,19 +113,6 @@ export function Landing() {
           </header>
 
           <div className={cn("flex flex-col items-center gap-5 py-8 text-center", layout.className.body)}>
-            <span
-              key={`eyebrow-${lang}`}
-              className={cn(
-                "inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-foreground/[0.04] px-3 py-1 text-xs font-medium text-foreground/80",
-                reveal,
-              )}
-            >
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-[var(--brand)] opacity-60 motion-reduce:animate-none" />
-                <span className="relative inline-flex size-2 rounded-full bg-[var(--brand)]" />
-              </span>
-              {t.eyebrow}
-            </span>
             {/* key: Wort-Animation läuft beim Sprachwechsel erneut */}
             <h1 key={lang} className={cn("text-3xl leading-[1.05] font-semibold tracking-tight", layout.className.headline)}>
               <span className="block">
@@ -162,9 +149,6 @@ export function Landing() {
                 </a>
               </Button>
             </div>
-            <p key={`connects-${lang}`} className={cn("text-xs text-foreground/60", reveal)} style={delay(1000)}>
-              {t.connects} <Ticker items={MCP_CLIENTS} />
-            </p>
           </div>
         </section>
 

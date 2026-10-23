@@ -64,8 +64,9 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
     imageFit: "contain",
     surface: "image",
     className: {
-      root: "md:grid md:grid-rows-2",
-      content: "md:px-10 md:pt-6",
+      // oben mindestens so hoch wie der Text, sonst halbe-halbe; Text liegt immer über dem Bild
+      root: "md:grid md:grid-rows-[minmax(min-content,1fr)_minmax(0,1fr)]",
+      content: "md:relative md:z-10 md:px-10 md:pt-6",
       body: "md:flex-1 md:justify-center",
       headline: "md:text-[clamp(2.5rem,4.5vw,4.25rem)]",
       image: "md:h-full",

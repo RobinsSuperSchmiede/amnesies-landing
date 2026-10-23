@@ -5,9 +5,6 @@ export const LINKS = {
   x: "https://x.com/DEIN-ACCOUNT", // TODO: X-Account
 }
 
-// Wechselnde Namen in der Zeile „Verbindet sich per MCP mit …“
-export const MCP_CLIENTS = ["Claude", "Cursor", "VS Code", "Windsurf", "Zed"]
-
 // tone = Helligkeit des Bildes, bestimmt die Textfarbe.
 // surface = Randfarbe des Bildes, damit Fläche und Bild nahtlos ineinander übergehen.
 // accent = Farbe des Motivs, für den Anmelden-Button und die zweite Headline-Zeile.

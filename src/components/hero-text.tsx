@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, type CSSProperties } from "react"
+import { Fragment, type CSSProperties } from "react"
 
 const delay = (ms: number): CSSProperties => ({ animationDelay: `${ms}ms` })
 
@@ -66,24 +66,5 @@ export function Emphasis({ text }: { text: string }) {
     ) : (
       <Fragment key={i}>{part}</Fragment>
     ),
-  )
-}
-
-// Wechselndes Wort, das von unten hereinrollt
-export function Ticker({ items, interval = 2200 }: { items: string[]; interval?: number }) {
-  const [index, setIndex] = useState(0)
-
-  useEffect(() => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const id = setInterval(() => setIndex((i) => (i + 1) % items.length), interval)
-    return () => clearInterval(id)
-  }, [items.length, interval])
-
-  return (
-    <span className="relative inline-flex overflow-hidden align-bottom">
-      <span key={index} className="ticker-in font-medium text-foreground">
-        {items[index]}
-      </span>
-    </span>
   )
 }
