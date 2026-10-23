@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react"
-import { ArrowRight, Brain, Image } from "lucide-react"
+import { ArrowRight, Image } from "lucide-react"
 import { Backdrop } from "@/components/backdrop"
 import { GithubIcon, XIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
@@ -28,8 +28,7 @@ function WithTooltip({ label, children }: { label: string; children: ReactNode }
 
 function Logo() {
   return (
-    <a href="/" className="flex items-center gap-2 text-base font-semibold tracking-tight">
-      <Brain className="size-5" />
+    <a href="/" className="text-base font-semibold tracking-tight">
       Amnesies
     </a>
   )
@@ -77,7 +76,7 @@ export function Landing() {
     <TooltipProvider>
       <div
         className={cn("relative flex h-dvh flex-col overflow-hidden transition-colors duration-700", layout.className.root)}
-        style={{ backgroundColor: bg.surface }}
+        style={{ backgroundColor: layout.surface === "white" ? "#ffffff" : bg.surface }}
       >
         {/* key: Einblend-Animation läuft beim Variantenwechsel erneut */}
         <section key={variant} className={cn("flex flex-col px-6 pt-4", layout.className.content)}>
@@ -132,7 +131,7 @@ export function Landing() {
           </div>
         </section>
 
-        <Backdrop src={bg.src} fit={layout.imageFit} className={cn("min-h-0 flex-1", layout.className.image)} />
+        <Backdrop src={bg.src} fit={layout.imageFit} rotated={layout.imageRotated} className={cn("min-h-0 flex-1", layout.className.image)} />
 
         <footer
           className={cn(

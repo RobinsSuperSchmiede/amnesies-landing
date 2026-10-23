@@ -5,6 +5,7 @@ export enum HeroVariant {
   Sidebar = "sidebar",
   ShiftRight = "shift-right",
   Split = "split",
+  Rotated = "rotated",
 }
 
 export type HeroLayout = {
@@ -13,6 +14,10 @@ export type HeroLayout = {
   logo: "corner" | "center"
   // cover füllt den Rahmen (beschneidet), contain zeigt das ganze Motiv auf der Randfarbe
   imageFit: "cover" | "contain"
+  // Bild um 90° gedreht (Hochformat)
+  imageRotated?: boolean
+  // image: Fläche in Randfarbe des Bildes, white: immer weiß (dann immer helles Theme)
+  surface: "image" | "white"
   className: {
     root: string // Gesamtlayout
     content: string // Bereich mit Logo, Headline, Text, Buttons
@@ -28,6 +33,7 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
     label: "1",
     logo: "corner",
     imageFit: "cover",
+    surface: "image",
     className: {
       root: "md:grid md:grid-cols-[minmax(22rem,34%)_1fr]",
       content: "md:h-dvh md:px-8 md:pt-6 md:pb-14",
@@ -41,6 +47,7 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
     label: "2",
     logo: "corner",
     imageFit: "cover",
+    surface: "image",
     className: {
       root: "md:block",
       content: "md:relative md:z-10 md:h-dvh md:w-[max(24rem,40vw)] md:px-12 md:pt-6 md:pb-14",
@@ -55,6 +62,7 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
     label: "3",
     logo: "center",
     imageFit: "contain",
+    surface: "image",
     className: {
       root: "md:grid md:grid-rows-2",
       content: "md:px-10 md:pt-6",
@@ -62,6 +70,22 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
       headline: "md:text-[clamp(2.5rem,4.5vw,4.25rem)]",
       image: "md:h-full",
       footer: "md:justify-end",
+    },
+  },
+  [HeroVariant.Rotated]: {
+    label: "4",
+    logo: "corner",
+    imageFit: "cover",
+    imageRotated: true,
+    surface: "white",
+    className: {
+      // Außenabstand rundum, seitlich größer, damit Content und Bild mittig sitzen
+      root: "md:grid md:grid-cols-[minmax(0,1fr)_auto] md:grid-rows-[minmax(0,1fr)] md:gap-[6vw] md:px-[max(4rem,calc((100vw-72rem)/2))] md:py-[6vh]",
+      content: "md:h-full md:min-h-0 md:px-0 md:pt-0 md:pb-10",
+      body: "md:flex-1 md:items-start md:justify-center md:text-left",
+      headline: "md:text-[clamp(2.5rem,4vw,4rem)]",
+      image: "md:aspect-[9/16] md:h-full md:flex-none md:rounded-2xl",
+      footer: "md:right-auto md:bottom-[6vh] md:left-[max(4rem,calc((100vw-72rem)/2))] md:justify-start md:p-0",
     },
   },
 }

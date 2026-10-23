@@ -1,6 +1,6 @@
 import { useEffect, useState, useSyncExternalStore } from "react"
 import { BACKGROUNDS, DEFAULT_BG } from "@/config"
-import { DEFAULT_VARIANT, HeroVariant } from "@/hero-variants"
+import { DEFAULT_VARIANT, HERO_VARIANTS, HeroVariant } from "@/hero-variants"
 import type { Lang } from "@/i18n"
 
 const store = {
@@ -56,7 +56,8 @@ export function usePreferences() {
   const [variant, setVariant] = useState(initialVariant)
 
   const bgIndex = chosenBg ?? DEFAULT_BG[systemDark ? "dark" : "light"]
-  const tone = BACKGROUNDS[bgIndex].tone
+  // Varianten mit weißer Fläche brauchen immer dunklen Text
+  const tone = HERO_VARIANTS[variant].surface === "white" ? "light" : BACKGROUNDS[bgIndex].tone
 
   useEffect(() => {
     document.documentElement.lang = lang

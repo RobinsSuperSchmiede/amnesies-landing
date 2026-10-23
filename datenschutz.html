@@ -6,8 +6,8 @@
   <meta name="color-scheme" content="light dark">
   <title>Datenschutz · Amnesies</title>
   <meta name="robots" content="noindex">
-  <!-- Theme vor dem ersten Rendern setzen; dunkle Hintergründe wie in src/config.ts -->
-  <script>try{var b=localStorage.getItem("bg"),d=b===null?matchMedia("(prefers-color-scheme: dark)").matches:[0,1,2,4].indexOf(+b)>-1;d&&document.documentElement.classList.add("dark")}catch(e){}</script>
+  <!-- Theme vor dem ersten Rendern setzen; dunkle Hintergründe wie in src/config.ts, weiße Varianten wie in src/hero-variants.ts -->
+  <script>try{var b=localStorage.getItem("bg"),d=localStorage.getItem("variant")==="rotated"?false:b===null?matchMedia("(prefers-color-scheme: dark)").matches:[0,1,2,4].indexOf(+b)>-1;d&&document.documentElement.classList.add("dark")}catch(e){}</script>
 </head>
 <body>
   <div id="root"></div>
