@@ -1,0 +1,114 @@
+:root {
+  --fg: #111;
+  --muted: rgba(0, 0, 0, .55);
+  --btn-bg: #111;
+  --btn-fg: #fff;
+  --ghost-border: rgba(0, 0, 0, .25);
+  --page-bg: #fff;
+  --bg-image: url("bg/6.png");
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #fff;
+    --muted: rgba(255, 255, 255, .55);
+    --btn-bg: #fff;
+    --btn-fg: #000;
+    --ghost-border: rgba(255, 255, 255, .3);
+    --page-bg: #000;
+    --bg-image: url("bg/5.png");
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--fg);
+  background: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+/* Landing: genau ein Bildschirm, kein Scrollen */
+body.landing {
+  height: 100dvh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--page-bg) var(--bg-image) center / cover no-repeat;
+}
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+  gap: .75rem;
+  padding: 1.5rem;
+}
+
+.btn {
+  font-size: .9rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: .6rem 1.1rem;
+  border-radius: 999px;
+  transition: opacity .15s;
+}
+.btn:hover { opacity: .8; }
+.btn-solid { background: var(--btn-bg); color: var(--btn-fg); }
+.btn-ghost {
+  border: 1px solid var(--ghost-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero {
+  display: grid;
+  place-items: center;
+}
+.hero h1 {
+  font-size: clamp(3rem, 12vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  /* oberhalb des Gehirns im Bild */
+  transform: translateY(-22vh);
+}
+
+.foot {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  font-size: .7rem;
+  color: var(--muted);
+}
+.foot a { text-decoration: none; }
+.foot a:hover { color: var(--fg); }
+.foot svg { display: block; }
+
+@media (max-width: 480px) {
+  .top { justify-content: center; padding: 1rem; }
+  .hero h1 { transform: translateY(-12vh); }
+  .foot { justify-content: center; }
+}
+
+/* Rechtstexte */
+body.legal {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  line-height: 1.6;
+}
+.legal h1 { font-size: 1.75rem; margin-bottom: 1.5rem; }
+.legal h2 { font-size: 1.05rem; margin: 1.75rem 0 .5rem; }
+.legal p { margin-bottom: .75rem; color: var(--fg); }
+.legal .back { display: inline-block; margin-bottom: 2rem; font-size: .85rem; color: var(--muted); text-decoration: none; }
+.legal [lang] { display: none; }
+html[lang="de"] .legal [lang="de"],
+html[lang="en"] .legal [lang="en"] { display: block; }
