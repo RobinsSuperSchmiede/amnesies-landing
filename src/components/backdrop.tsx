@@ -46,7 +46,7 @@ export function Backdrop({
           alt=""
           decoding="async"
           className={cn(
-            "backdrop-layer absolute motion-reduce:transition-none",
+            "backdrop-layer breathe absolute motion-reduce:transition-none",
             "inset-0 size-full",
             rotated &&
               "md:inset-auto md:top-1/2 md:left-1/2 md:h-[56.25%] md:w-[177.78%] md:max-w-none md:-translate-x-1/2 md:-translate-y-1/2 md:rotate-90",

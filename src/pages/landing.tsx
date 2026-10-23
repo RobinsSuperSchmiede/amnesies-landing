@@ -1,10 +1,11 @@
 import type { CSSProperties, ReactNode } from "react"
 import { ArrowRight, Contrast, Image } from "lucide-react"
 import { Backdrop } from "@/components/backdrop"
+import { BangLine, Emphasis, ForgettingLine, Ticker } from "@/components/hero-text"
 import { GithubIcon, XIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { BACKGROUNDS, LINKS } from "@/config"
+import { BACKGROUNDS, LINKS, MCP_CLIENTS } from "@/config"
 import { HERO_VARIANTS, HeroVariant } from "@/hero-variants"
 import { usePreferences } from "@/hooks/use-preferences"
 import { TEXT } from "@/i18n"
@@ -112,28 +113,38 @@ export function Landing() {
           </header>
 
           <div className={cn("flex flex-col items-center gap-5 py-8 text-center", layout.className.body)}>
-            <h1
-              className={cn("text-3xl leading-[1.05] font-semibold tracking-tight", layout.className.headline, reveal)}
-              style={delay(100)}
+            <span
+              key={`eyebrow-${lang}`}
+              className={cn(
+                "inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-foreground/[0.04] px-3 py-1 text-xs font-medium text-foreground/80",
+                reveal,
+              )}
             >
-              <span key={lang} className={cn("block", swap)}>
-                {t.headline}
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-[var(--brand)] opacity-60 motion-reduce:animate-none" />
+                <span className="relative inline-flex size-2 rounded-full bg-[var(--brand)]" />
+              </span>
+              {t.eyebrow}
+            </span>
+            {/* key: Wort-Animation läuft beim Sprachwechsel erneut */}
+            <h1 key={lang} className={cn("text-3xl leading-[1.05] font-semibold tracking-tight", layout.className.headline)}>
+              <span className="block">
+                <ForgettingLine text={t.headline} start={150} />
               </span>
               {/* zweite Zeile: Serifenschrift in der Akzentfarbe */}
               <span
-                key={`${lang}-accent`}
-                className={cn("block font-serif text-[1.15em] leading-none font-normal tracking-normal italic transition-colors duration-700", swap)}
+                className="block font-serif text-[1.15em] leading-none font-normal tracking-normal italic transition-colors duration-700"
                 style={{ color: clash ? undefined : bg.accent }}
               >
-                {t.headlineAccent}
+                <BangLine text={t.headlineAccent} start={450} />
               </span>
             </h1>
-            <p className={cn("max-w-xl text-sm leading-relaxed text-foreground/75 md:text-base", reveal)} style={delay(250)}>
+            <p className={cn("max-w-xl text-sm leading-relaxed text-foreground/70 md:text-base", reveal)} style={delay(700)}>
               <span key={lang} className={swap}>
-                {t.lead}
+                <Emphasis text={t.lead} />
               </span>
             </p>
-            <div className={cn("mt-2 flex flex-wrap gap-3", reveal)} style={delay(400)}>
+            <div className={cn("mt-2 flex flex-wrap gap-3", reveal)} style={delay(850)}>
               <Button asChild variant="outline" size="lg" className="cta-ghost">
                 <a href={LINKS.github} target="_blank" rel="noopener">
                   <GithubIcon />
@@ -151,6 +162,9 @@ export function Landing() {
                 </a>
               </Button>
             </div>
+            <p key={`connects-${lang}`} className={cn("text-xs text-foreground/60", reveal)} style={delay(1000)}>
+              {t.connects} <Ticker items={MCP_CLIENTS} />
+            </p>
           </div>
         </section>
 
@@ -162,7 +176,7 @@ export function Landing() {
             layout.className.footer,
             reveal,
           )}
-          style={delay(600)}
+          style={delay(1100)}
         >
           <a key={`i-${lang}`} href="/impressum.html" className={`transition-colors hover:text-foreground ${swap}`}>
             {t.imprint}
