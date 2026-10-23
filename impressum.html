@@ -6,32 +6,11 @@
   <meta name="color-scheme" content="light dark">
   <title>Impressum · Amnesies</title>
   <meta name="robots" content="noindex">
-  <link rel="stylesheet" href="assets/style.css">
+  <!-- Theme vor dem ersten Rendern setzen; dunkle Hintergründe wie in src/config.ts -->
+  <script>try{var b=localStorage.getItem("bg"),d=b===null?matchMedia("(prefers-color-scheme: dark)").matches:[0,1,2,4].indexOf(+b)>-1;d&&document.documentElement.classList.add("dark")}catch(e){}</script>
 </head>
-<body class="legal">
-  <a class="btn btn-ghost btn-sm back" href="./">← Amnesies</a>
-
-  <!-- TODO: Platzhalter durch echte Angaben ersetzen -->
-  <section lang="de">
-    <h1>Impressum</h1>
-    <h2>Angaben gemäß § 5 DDG</h2>
-    <p>[Vorname Nachname]<br>[Straße Hausnummer]<br>[PLZ Ort]<br>[Land]</p>
-    <h2>Kontakt</h2>
-    <p>E-Mail: [kontakt@example.com]</p>
-    <h2>Verantwortlich für den Inhalt</h2>
-    <p>[Vorname Nachname], Anschrift wie oben</p>
-  </section>
-
-  <section lang="en">
-    <h1>Imprint</h1>
-    <h2>Information according to § 5 DDG (German law)</h2>
-    <p>[First name Last name]<br>[Street No.]<br>[ZIP City]<br>[Country]</p>
-    <h2>Contact</h2>
-    <p>Email: [contact@example.com]</p>
-    <h2>Responsible for content</h2>
-    <p>[First name Last name], address as above</p>
-  </section>
-
-  <script src="assets/main.js"></script>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/entries/impressum.tsx"></script>
 </body>
 </html>
