@@ -4,10 +4,10 @@ Statische One-Page-Website für Amnesies (die SaaS-App liegt in einem eigenen Re
 
 - `index.html` – Startseite (kein Scrollen, Name + zwei Buttons + Footer)
 - `impressum.html`, `datenschutz.html` – Rechtstexte (DE/EN, Platzhalter ausfüllen)
-- `assets/main.js` – Links (GitHub, App-Login, X) und Übersetzungen
-- `assets/style.css` – Styles, Hintergrund hell `bg/6.png`, dunkel `bg/5.png`
+- `assets/main.js` – Links (GitHub, App-Login, X), Texte/Übersetzungen, Hintergrundliste
+- `assets/style.css` – Styles (Buttons im shadcn/ui-Stil), Standard-Hintergrund hell `bg/6.png`, dunkel `bg/5.png`
 
-Sprache und Dark Mode folgen automatisch den Systemeinstellungen.
+Sprache und Dark Mode folgen den Systemeinstellungen. Oben links lassen sich Sprache (DE/EN) und Hintergrund wechseln; die Wahl wird im Browser gespeichert.
 
 ## Lokal ansehen
 
