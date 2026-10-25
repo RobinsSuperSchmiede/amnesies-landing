@@ -46,6 +46,7 @@ export function Landing() {
   // Akzent wäre auf gleichfarbiger Fläche unsichtbar: dann Button weiß mit Akzentschrift
   const clash = !neutral && bg.accentIsSurface
   const brand = {
+    "--surface": surface,
     "--brand": clash ? "#ffffff" : bg.accent,
     "--brand-fg": clash ? bg.accent : "#ffffff",
   } as CSSProperties

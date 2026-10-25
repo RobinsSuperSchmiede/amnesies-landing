@@ -6,6 +6,7 @@ export enum HeroVariant {
   ShiftRight = "shift-right",
   Split = "split",
   Rotated = "rotated",
+  Centered = "centered",
 }
 
 export type HeroLayout = {
@@ -87,6 +88,22 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
       headline: "md:text-[clamp(2.5rem,4vw,4rem)]",
       image: "md:aspect-[9/16] md:h-full md:flex-none md:rounded-2xl",
       footer: "md:right-auto md:bottom-[6vh] md:left-[max(4rem,calc((100vw-72rem)/2))] md:justify-start md:p-0",
+    },
+  },
+  [HeroVariant.Centered]: {
+    label: "5",
+    logo: "center",
+    imageFit: "contain",
+    surface: "image",
+    className: {
+      // Bild zentriert über die ganze Fläche, Text liegt mittig darüber
+      root: "md:block",
+      content: "md:relative md:z-10 md:h-dvh md:px-10 md:pt-6 md:pb-14",
+      // weiche Abdunklung in Flächenfarbe hinter dem Text, damit er über dem Bild lesbar bleibt
+      body: "md:relative md:flex-1 md:justify-center md:before:absolute md:before:inset-x-[-12%] md:before:inset-y-[8%] md:before:-z-10 md:before:bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--surface)_88%,transparent)_45%,transparent)]",
+      headline: "md:text-[clamp(2.5rem,4.5vw,4.25rem)]",
+      image: "md:absolute md:inset-0",
+      footer: "md:justify-center",
     },
   },
 }
