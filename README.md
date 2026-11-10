@@ -1,7 +1,7 @@
 # Amnesies – Landing Page
 
 One-Page-Website für Amnesies (die SaaS-App liegt in einem eigenen Repo).
-Vite + React + TypeScript + Tailwind CSS v4 + shadcn/ui.
+Vite + React + TypeScript + Tailwind CSS v4, Komponenten im Stil des „Minimal“-Design-Systems.
 
 - `index.html`, `impressum.html`, `datenschutz.html` – Einstiegsseiten (Multi-Page-Build)
 - `src/config.ts` – Links (GitHub, App-Login, X) und Hintergrundliste
@@ -9,7 +9,7 @@ Vite + React + TypeScript + Tailwind CSS v4 + shadcn/ui.
 - `src/pages/landing.tsx` – Startseite (kein Scrollen)
 - `src/hero-variants.ts` – Hero-Layout-Varianten (Enum + Config); neue Variante dort eintragen
 - `src/pages/legal.tsx` – Impressum und Datenschutz (Platzhalter ausfüllen)
-- `src/components/ui/` – shadcn-Komponenten (`npx shadcn@latest add …`)
+- `src/components/minimal.tsx`, `src/styles/minimal.css` – Buttons, CTA, Gruppen/Segmente und Tooltip aus dem Minimal-Design-System (Vorlage: `Minimal Design System.html`)
 - `public/bg/` – Hintergrundbilder
 
 Sprache und Dark Mode folgen den Systemeinstellungen. Oben lassen sich Hero-Variante (1–4), Sprache (DE/EN), Hintergrund und in Variante 4 die Fläche (Schwarz/Weiß) wechseln; die Wahl wird im Browser gespeichert. Das Bild wird ohne Filter gezeigt; die Fläche daneben bekommt die Randfarbe des Bildes (`surface` in `src/config.ts`), die Textfarbe richtet sich nach dessen Helligkeit.

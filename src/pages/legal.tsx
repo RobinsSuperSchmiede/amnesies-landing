@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 import { ArrowLeft } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { BtnLink } from "@/components/minimal"
 import { usePreferences } from "@/hooks/use-preferences"
 import type { Lang } from "@/i18n"
 
@@ -61,12 +61,10 @@ export function Legal({ page }: { page: keyof typeof DOCS }) {
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-12 leading-relaxed animate-in fade-in duration-500 motion-reduce:animate-none">
-      <Button asChild variant="ghost" size="sm" className="-ml-3 mb-8 text-muted-foreground">
-        <a href="/">
-          <ArrowLeft />
-          Amnesies
-        </a>
-      </Button>
+      <BtnLink variant="ghost" size="sm" href="/" className="-ml-3 mb-8 text-muted-foreground">
+        <ArrowLeft />
+        Amnesies
+      </BtnLink>
       <h1 className="mb-6 text-3xl font-bold tracking-tight">{doc.title}</h1>
       {doc.sections.map((s) => (
         <section key={s.heading}>

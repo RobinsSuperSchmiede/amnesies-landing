@@ -15,6 +15,7 @@ export const TEXT = {
     switchBg: "Hintergrund wechseln",
     switchVariant: "Hero-Variante",
     switchSurface: "Hintergrund Schwarz/Weiß",
+    display: "Darstellung",
   },
   en: {
     headline: "Your AI forgets.",
@@ -28,5 +29,6 @@ export const TEXT = {
     switchBg: "Change background",
     switchVariant: "Hero variant",
     switchSurface: "Background black/white",
+    display: "Display",
   },
 } satisfies Record<Lang, Record<string, string>>

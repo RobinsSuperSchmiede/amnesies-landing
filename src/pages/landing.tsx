@@ -1,10 +1,9 @@
-import type { CSSProperties, ReactNode } from "react"
+import type { CSSProperties } from "react"
 import { ArrowRight, Contrast, Image } from "lucide-react"
 import { Backdrop } from "@/components/backdrop"
 import { BangLine, Emphasis, ForgettingLine } from "@/components/hero-text"
 import { GithubIcon, XIcon } from "@/components/icons"
-import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Btn, BtnLink, Cta, Group, Segmented } from "@/components/minimal"
 import { BACKGROUNDS, LINKS } from "@/config"
 import { HERO_VARIANTS, HeroVariant } from "@/hero-variants"
 import { usePreferences } from "@/hooks/use-preferences"
@@ -17,15 +16,6 @@ const reveal =
 const delay = (ms: number): CSSProperties => ({ animationDelay: `${ms}ms` })
 // Text bei Sprachwechsel kurz einblenden
 const swap = "animate-in fade-in duration-300 motion-reduce:animate-none"
-
-function WithTooltip({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>{children}</TooltipTrigger>
-      <TooltipContent>{label}</TooltipContent>
-    </Tooltip>
-  )
-}
 
 function Logo() {
   return (
@@ -48,56 +38,44 @@ export function Landing() {
   const brand = {
     "--surface": surface,
     "--brand": clash ? "#ffffff" : bg.accent,
-    "--brand-fg": clash ? bg.accent : "#ffffff",
+    "--brand-fg": clash ? bg.accent : "#0b0b0c",
   } as CSSProperties
 
   const toolbar = (
-    <div className="flex items-center gap-1">
-      <WithTooltip label={t.switchVariant}>
-        <div role="group" aria-label={t.switchVariant} className="flex rounded-md border border-foreground/15 p-0.5">
-          {Object.values(HeroVariant).map((v) => (
-            <Button
-              key={v}
-              size="icon-xs"
-              variant={v === variant ? "secondary" : "ghost"}
-              aria-pressed={v === variant}
-              onClick={() => prefs.selectVariant(v)}
-              className="w-6 tabular-nums"
-            >
-              {HERO_VARIANTS[v].label}
-            </Button>
-          ))}
-        </div>
-      </WithTooltip>
-      <WithTooltip label={t.switchLang}>
-        <Button variant="ghost" size="icon-sm" onClick={prefs.toggleLang} aria-label={t.switchLang} className="text-xs">
+    <div className="flex items-center gap-2">
+      <Segmented
+        label={t.switchVariant}
+        tip={t.switchVariant}
+        items={Object.values(HeroVariant).map((v) => ({ value: v, label: HERO_VARIANTS[v].label }))}
+        value={variant}
+        onChange={prefs.selectVariant}
+        itemWidth={24}
+      />
+      <Group label={t.display}>
+        <Btn variant="ghost" size="sm" icon tip={t.switchLang} onClick={prefs.toggleLang}>
           {lang.toUpperCase()}
-        </Button>
-      </WithTooltip>
-      {neutral && (
-        <WithTooltip label={t.switchSurface}>
-          <Button variant="ghost" size="icon-sm" onClick={prefs.toggleNeutral} aria-label={t.switchSurface}>
+        </Btn>
+        {neutral && (
+          <Btn variant="ghost" size="sm" icon tip={t.switchSurface} onClick={prefs.toggleNeutral}>
             <Contrast />
-          </Button>
-        </WithTooltip>
-      )}
-      <WithTooltip label={`${t.switchBg} (${bgIndex + 1}/${BACKGROUNDS.length})`}>
-        <Button variant="ghost" size="icon-sm" onClick={prefs.nextBg} aria-label={t.switchBg}>
+          </Btn>
+        )}
+        <Btn variant="ghost" size="sm" icon tip={`${t.switchBg} (${bgIndex + 1}/${BACKGROUNDS.length})`} onClick={prefs.nextBg}>
           <Image />
-        </Button>
-      </WithTooltip>
+        </Btn>
+      </Group>
     </div>
   )
 
   return (
-    <TooltipProvider>
+    <>
       <div
         className={cn("relative flex h-dvh flex-col overflow-hidden transition-colors duration-700", layout.className.root)}
         style={{ backgroundColor: surface, ...brand }}
       >
         {/* key: Einblend-Animation läuft beim Variantenwechsel erneut */}
         <section key={variant} className={cn("relative z-10 flex flex-col px-6 pt-4", layout.className.content)}>
-          <header className={cn("relative flex items-center", reveal)}>
+          <header className={cn("relative flex flex-wrap items-center gap-y-2", reveal)}>
             {layout.logo === "corner" ? (
               <>
                 <Logo />
@@ -133,22 +111,18 @@ export function Landing() {
               </span>
             </p>
             <div className={cn("mt-2 flex flex-wrap gap-3", reveal)} style={delay(850)}>
-              <Button asChild variant="outline" size="lg" className="cta-ghost">
-                <a href={LINKS.github} target="_blank" rel="noopener">
-                  <GithubIcon />
-                  <span key={lang} className={swap}>
-                    {t.runLocally}
-                  </span>
-                </a>
-              </Button>
-              <Button asChild size="lg" className="cta group relative overflow-hidden">
-                <a href={LINKS.app}>
-                  <span key={lang} className={swap}>
-                    {t.signIn}
-                  </span>
-                  <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
-              </Button>
+              <BtnLink size="lg" className="h-9" href={LINKS.github} target="_blank" rel="noopener">
+                <GithubIcon />
+                <span key={lang} className={swap}>
+                  {t.runLocally}
+                </span>
+              </BtnLink>
+              <Cta href={LINKS.app}>
+                <span key={lang} className={swap}>
+                  {t.signIn}
+                </span>
+                <ArrowRight />
+              </Cta>
             </div>
           </div>
         </section>
@@ -174,6 +148,6 @@ export function Landing() {
           </a>
         </footer>
       </div>
-    </TooltipProvider>
+    </>
   )
 }
