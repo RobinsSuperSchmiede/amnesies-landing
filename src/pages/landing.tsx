@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react"
-import { ArrowRight, Contrast, Image } from "lucide-react"
+import { ArrowRight, Contrast, Download, Image } from "lucide-react"
 import { Backdrop } from "@/components/backdrop"
 import { BangLine, Emphasis, ForgettingLine } from "@/components/hero-text"
 import { GithubIcon, XIcon } from "@/components/icons"
@@ -111,19 +111,27 @@ export function Landing() {
               </span>
             </p>
             <div className={cn("mt-2 flex flex-wrap gap-3", reveal)} style={delay(850)}>
-              <BtnLink size="lg" className="h-9" href={LINKS.github} target="_blank" rel="noopener">
-                <GithubIcon />
+              <BtnLink size="lg" className="h-9" href={LINKS.download} target="_blank" rel="noopener">
+                <Download />
                 <span key={lang} className={swap}>
-                  {t.runLocally}
+                  {t.download}
                 </span>
+              </BtnLink>
+              <BtnLink size="lg" icon className="h-9" href={LINKS.github} target="_blank" rel="noopener" tip={t.sourceCode} aria-label={t.sourceCode}>
+                <GithubIcon />
               </BtnLink>
               <Cta href={LINKS.app}>
                 <span key={lang} className={swap}>
-                  {t.signIn}
+                  {t.useOnline}
                 </span>
                 <ArrowRight />
               </Cta>
             </div>
+            <p className={cn("max-w-xl text-xs text-foreground/60", reveal)} style={delay(950)}>
+              <span key={lang} className={swap}>
+                <Emphasis text={t.pricing} />
+              </span>
+            </p>
           </div>
         </section>
 

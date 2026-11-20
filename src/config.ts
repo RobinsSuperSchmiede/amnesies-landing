@@ -1,7 +1,11 @@
 // Links hier eintragen
 export const LINKS = {
-  github: "https://github.com/DEIN-USER/amnesies", // TODO: GitHub-Repo des SaaS
-  app: "https://app.amnesies.com/login", // TODO: Login-URL des SaaS
+  // Open-Source-Repo der App; muss öffentlich sein, damit Repo- und Download-Link funktionieren
+  github: "https://github.com/RobinsSuperSchmiede/PLM",
+  // Installer der neuesten Release (Workflow „Desktop app“, Tag desktop-v*)
+  download: "https://github.com/RobinsSuperSchmiede/PLM/releases/latest",
+  // Gehostete Version (amnesies-cloud), Abo 9 €/Monat
+  app: "https://app.amnesies.com",
   x: "https://x.com/DEIN-ACCOUNT", // TODO: X-Account
 }
 
