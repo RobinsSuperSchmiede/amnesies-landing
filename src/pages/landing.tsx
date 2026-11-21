@@ -1,10 +1,13 @@
 import type { CSSProperties } from "react"
-import { ArrowRight, Contrast, Download, Image } from "lucide-react"
+import { ArrowRight, ChevronDown, Contrast, Download, Image } from "lucide-react"
 import { Backdrop } from "@/components/backdrop"
+import { FeatureRoadmap } from "@/components/feature-roadmap"
 import { BangLine, Emphasis, ForgettingLine } from "@/components/hero-text"
 import { GithubIcon, XIcon } from "@/components/icons"
 import { Btn, BtnLink, Cta, Group, Segmented } from "@/components/minimal"
+import { Pricing } from "@/components/pricing"
 import { BACKGROUNDS, LINKS } from "@/config"
+import { CONTENT } from "@/content"
 import { HERO_VARIANTS, HeroVariant } from "@/hero-variants"
 import { usePreferences } from "@/hooks/use-preferences"
 import { TEXT } from "@/i18n"
@@ -29,6 +32,7 @@ export function Landing() {
   const prefs = usePreferences()
   const { lang, bgIndex, variant } = prefs
   const t = TEXT[lang]
+  const c = CONTENT[lang]
   const bg = BACKGROUNDS[bgIndex]
   const layout = HERO_VARIANTS[variant]
   const neutral = layout.surface === "neutral"
@@ -68,11 +72,9 @@ export function Landing() {
   )
 
   return (
-    <>
-      <div
-        className={cn("relative flex h-dvh flex-col overflow-hidden transition-colors duration-700", layout.className.root)}
-        style={{ backgroundColor: surface, ...brand }}
-      >
+    // Fläche und Akzent gelten für die ganze Seite, damit Roadmap und Preise nahtlos an den Hero anschließen
+    <div className="transition-colors duration-700" style={{ backgroundColor: surface, ...brand }}>
+      <div className={cn("relative flex h-dvh flex-col overflow-hidden", layout.className.root)}>
         {/* key: Einblend-Animation läuft beim Variantenwechsel erneut */}
         <section key={variant} className={cn("relative z-10 flex flex-col px-6 pt-4", layout.className.content)}>
           <header className={cn("relative flex flex-wrap items-center gap-y-2", reveal)}>
@@ -137,25 +139,39 @@ export function Landing() {
 
         <Backdrop src={bg.src} fit={layout.imageFit} rotated={layout.imageRotated} className={cn("min-h-0 flex-1", layout.className.image)} />
 
-        <footer
+        {/* Hinweis, dass es unten weitergeht */}
+        <a
+          href="#features"
           className={cn(
-            "absolute inset-x-0 bottom-0 flex items-center justify-center gap-4 px-6 py-4 text-[0.7rem] text-foreground/70",
-            layout.className.footer,
+            "absolute inset-x-0 bottom-0 z-10 flex items-center justify-center gap-1.5 px-6 py-4 text-[0.7rem] text-foreground/70 transition-colors hover:text-foreground",
+            layout.className.bottom,
             reveal,
           )}
           style={delay(1100)}
         >
-          <a key={`i-${lang}`} href="/impressum.html" className={`transition-colors hover:text-foreground ${swap}`}>
-            {t.imprint}
-          </a>
-          <a key={`p-${lang}`} href="/datenschutz.html" className={`transition-colors hover:text-foreground ${swap}`}>
-            {t.privacy}
-          </a>
-          <a href={LINKS.x} target="_blank" rel="noopener" aria-label="X" className="transition-colors hover:text-foreground">
-            <XIcon className="size-3" />
-          </a>
-        </footer>
+          <span key={lang} className={swap}>
+            {c.scrollHint}
+          </span>
+          <ChevronDown className="size-3.5 animate-bounce motion-reduce:animate-none" />
+        </a>
       </div>
-    </>
+
+      <div id="features">
+        <FeatureRoadmap key={lang} label={c.roadmapLabel} title={c.roadmapTitle} features={c.features} />
+      </div>
+      <Pricing c={c} />
+
+      <footer className="flex items-center justify-center gap-4 px-6 py-6 text-[0.7rem] text-foreground/70">
+        <a key={`i-${lang}`} href="/impressum.html" className={`transition-colors hover:text-foreground ${swap}`}>
+          {t.imprint}
+        </a>
+        <a key={`p-${lang}`} href="/datenschutz.html" className={`transition-colors hover:text-foreground ${swap}`}>
+          {t.privacy}
+        </a>
+        <a href={LINKS.x} target="_blank" rel="noopener" aria-label="X" className="transition-colors hover:text-foreground">
+          <XIcon className="size-3" />
+        </a>
+      </footer>
+    </div>
   )
 }

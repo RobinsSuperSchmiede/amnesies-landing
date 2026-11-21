@@ -4,8 +4,9 @@ export const LINKS = {
   github: "https://github.com/RobinsSuperSchmiede/PLM",
   // Installer der neuesten Release (Workflow „Desktop app“, Tag desktop-v*)
   download: "https://github.com/RobinsSuperSchmiede/PLM/releases/latest",
-  // Gehostete Version (amnesies-cloud), Abo 9 €/Monat
-  app: "https://app.amnesies.com",
+  // Gehostete Version (Repo amnesies-cloud), Abo 9 €/Monat – eigene Konten, unabhängig von lokalen Installationen.
+  // VITE_APP_URL überschreibt die Adresse, z. B. für einen Testserver.
+  app: import.meta.env.VITE_APP_URL ?? "https://app.amnesies.com",
   x: "https://x.com/DEIN-ACCOUNT", // TODO: X-Account
 }
 

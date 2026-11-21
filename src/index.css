@@ -173,3 +173,46 @@
 .backdrop-layer {
   transition: opacity 1.2s ease, scale 8s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+
+/* ---------- Feature-Roadmap (wie im Onboarding der App) ---------- */
+
+/* Punkte bis zur nächsten Station schimmern als Welle auf sie zu */
+.roadmap-dot-lead {
+  animation: roadmap-dot 1.8s ease-in-out infinite both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes roadmap-dot {
+  0%, 100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Die aktuelle Station pulsiert leise */
+.roadmap-halo {
+  opacity: 0.18;
+  animation: roadmap-halo 2.4s ease-in-out infinite;
+}
+@keyframes roadmap-halo {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.22;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.08;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roadmap-dot-lead,
+  .roadmap-halo {
+    animation: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}

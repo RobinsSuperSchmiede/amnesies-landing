@@ -25,7 +25,7 @@ export type HeroLayout = {
     body: string // Headline, Text, Buttons
     headline: string
     image: string // Rahmen des Bildes
-    footer: string
+    bottom: string // unterer Rand: Hinweis zum Weiterscrollen
   }
 }
 
@@ -41,7 +41,7 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
       body: "md:flex-1 md:items-start md:justify-center md:text-left",
       headline: "md:text-[clamp(2.25rem,3.4vw,3.25rem)]",
       image: "md:h-dvh",
-      footer: "md:right-auto md:w-[max(22rem,34%)] md:justify-start md:px-8",
+      bottom: "md:right-auto md:w-[max(22rem,34%)] md:justify-start md:px-8",
     },
   },
   [HeroVariant.ShiftRight]: {
@@ -56,7 +56,7 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
       headline: "md:text-[clamp(2.5rem,4vw,4rem)]",
       // Bild beginnt rechts der Textspalte und ragt rechts aus dem Viewport
       image: "md:absolute md:top-1/2 md:left-[max(24rem,40vw)] md:aspect-video md:w-[75vw] md:flex-none md:-translate-y-1/2",
-      footer: "md:justify-end",
+      bottom: "md:justify-end",
     },
   },
   [HeroVariant.Split]: {
@@ -71,7 +71,7 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
       body: "md:flex-1 md:justify-center",
       headline: "md:text-[clamp(2.5rem,4.5vw,4.25rem)]",
       image: "md:h-full",
-      footer: "md:justify-end",
+      bottom: "md:justify-end",
     },
   },
   [HeroVariant.Rotated]: {
@@ -87,7 +87,7 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
       body: "md:flex-1 md:items-start md:justify-center md:text-left",
       headline: "md:text-[clamp(2.5rem,4vw,4rem)]",
       image: "md:aspect-[9/16] md:h-full md:flex-none md:rounded-2xl",
-      footer: "md:right-auto md:bottom-[6vh] md:left-[max(4rem,calc((100vw-72rem)/2))] md:justify-start md:p-0",
+      bottom: "md:right-auto md:bottom-[6vh] md:left-[max(4rem,calc((100vw-72rem)/2))] md:justify-start md:p-0",
     },
   },
   [HeroVariant.Centered]: {
@@ -103,7 +103,7 @@ export const HERO_VARIANTS: Record<HeroVariant, HeroLayout> = {
       body: "md:relative md:flex-1 md:justify-center md:before:absolute md:before:inset-x-[-12%] md:before:inset-y-[8%] md:before:-z-10 md:before:bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--surface)_88%,transparent)_45%,transparent)]",
       headline: "md:text-[clamp(2.5rem,4.5vw,4.25rem)]",
       image: "md:absolute md:inset-0",
-      footer: "md:justify-center",
+      bottom: "md:justify-center",
     },
   },
 }
